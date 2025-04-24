@@ -7,10 +7,10 @@ function envoiJSON($tab){
     echo $json;
 }
 
-function recupVilles($texte) {
+function recupNotes() {
     //variables de connexion
     $host = 'localhost';		
-    $dbname = 'vcollege';
+    $dbname = 'college';
     $username = 'root';
     $password = '';
     //tentative de connexion à la base de donnée
@@ -23,17 +23,18 @@ function recupVilles($texte) {
         die('Erreur : '. $e->getMessage());
     }
     //préparation de la requête
-    $requete = "select * from note";
+    $requete = "select * from eleve";
     //requête auprès de la base
     $resultat = $bdd->query($requete);
     // On récupère tout dans la variable tableau
     $tableau = $resultat->fetchall(); 
-    return $tableau; 
+    print_r($tableau);
     //affichage du tableau - c'est un tableau de tableau
     //print_r($tableau); 
     // foreach($tableau as $cellule){
     //     echo $cellule['ville_nom']."   ".$cellule['ville_code_postal']."<br>";
     // } 
 }
+recupNotes();
 
 ?>  
