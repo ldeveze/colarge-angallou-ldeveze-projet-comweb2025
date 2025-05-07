@@ -1,42 +1,131 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+/* App.css */
+body {
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f7f9fc;
+  color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  padding-top: 60px;
+}
+
+.container {
+  background: white;
+  padding: 30px 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 600px; /* un peu plus large pour les tableaux */
+  position: relative;
+}
+
+
+h3 {
+  margin-bottom: 24px;
+  font-size: 22px;
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 6px;
+  font-size: 16px;
+  margin: 10px 0;
+  cursor: pointer;
+  width: 100%;
+  transition: background-color 0.3s;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+button:hover {
+  background-color: #0056b3;
 }
 
-.card {
-  padding: 2em;
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin-top: 6px;
+  margin-bottom: 16px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
 }
 
-.read-the-docs {
-  color: #888;
+/* Couleurs spécifiques */
+.button-eleve {
+  background-color: #ff9800; /* Orange */
+}
+
+.button-eleve:hover {
+  background-color: #e68900;
+}
+
+.button-prof {
+  background-color: #007b99; /* Bleu-vert (complémentaire) */
+}
+
+.button-prof:hover {
+  background-color: #006280;
+}
+
+.button-retour {
+  background-color: #ccc; /* Gris clair */
+  color: #333;
+}
+
+.button-retour:hover {
+  background-color: #b3b3b3;
+}
+
+.button-connexion {
+  background-color: #007bff;
+  color: white;
+}
+
+.button-connexion:hover {
+  background-color: #0056b3;
+}
+
+.notes-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.notes-table th,
+.notes-table td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: center;
+}
+
+.notes-table th {
+  background-color: #f0f0f0;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.button-deconnexion {
+  background-color: #dc3545; /* rouge doux */
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.button-deconnexion:hover {
+  background-color: #b02a37;
 }
