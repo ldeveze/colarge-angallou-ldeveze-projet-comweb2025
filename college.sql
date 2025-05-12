@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : jeu. 24 avr. 2025 à 12:03
+-- Généré le : mer. 07 mai 2025 à 12:18
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.2.12
 
@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `classe` (
   `id` int(11) NOT NULL,
-  `libelle` varchar(5) NOT NULL
+  `libelle` varchar(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -116,12 +116,26 @@ INSERT INTO `matiere` (`id`, `nom`) VALUES
 --
 
 CREATE TABLE `note` (
-  `libelle` varchar(20) NOT NULL,
+  `id` int(11) NOT NULL,
+  `libelle` varchar(50) NOT NULL,
   `valeur` int(11) NOT NULL,
-  `coefficient` float NOT NULL,
   `id_eleve` int(11) NOT NULL,
   `id_matiere` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `note`
+--
+
+INSERT INTO `note` (`id`, `libelle`, `valeur`, `id_eleve`, `id_matiere`) VALUES
+(1, 'Interrogation surpri', 11, 2, 12),
+(2, 'Examen final', 14, 3, 5),
+(3, 'Oral', 8, 1, 7),
+(4, 'Dissertation', 17, 4, 1),
+(5, 'Projet', 20, 3, 8),
+(6, 'Examen intermédiaire', 6, 4, 3),
+(7, 'Participation orale', 10, 1, 10),
+(8, 'Travail maison', 13, 2, 8);
 
 -- --------------------------------------------------------
 
@@ -144,7 +158,18 @@ CREATE TABLE `prof` (
 
 INSERT INTO `prof` (`id`, `nom`, `prenom`, `id_matiere`, `pseudo`, `motdepasse`) VALUES
 (1, 'Faragonda', 'Alma', 8, 'alfaragonda', 'surmulot452'),
-(2, 'Griffin', 'Isabelle', 1, 'isgriffin', 'darksasuke33');
+(2, 'Griffin', 'Isabelle', 1, 'isgriffin', 'darksasuke33'),
+(3, 'Stiti', 'Louise', 2, 'lostiti', 'singerie985'),
+(4, 'Bolet', 'Loïc', 3, 'lobolet', 'amanite42'),
+(5, 'Raton', 'Candy', 4, 'caraton', '36berlingot36'),
+(6, 'Bonbeurre', 'Jean', 5, 'jebonbeurre', 'sauciflar89'),
+(7, 'Ptitegoutte', 'Justine', 6, 'juptitegoutte', 'jadoreleau'),
+(8, 'Bambelle', 'Larry', 7, 'labambelle', 'farfadet652'),
+(9, 'Khaman', 'Mehdi', 9, 'mekhaman', 'aspirine33'),
+(10, 'Graf', 'Otto', 10, 'otgraf', 'star2fou'),
+(11, 'Metrehé', 'Sandy', 11, 'sametrehé', 'hypervitesse'),
+(12, 'Auzaur', 'Amandine', 12, 'amauzaur', 'diplo758'),
+(13, 'Tatouille', 'Lara', 13, 'latatouille', 'legume845');
 
 --
 -- Index pour les tables déchargées
@@ -166,6 +191,12 @@ ALTER TABLE `eleve`
 -- Index pour la table `matiere`
 --
 ALTER TABLE `matiere`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `note`
+--
+ALTER TABLE `note`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -197,10 +228,16 @@ ALTER TABLE `matiere`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
+-- AUTO_INCREMENT pour la table `note`
+--
+ALTER TABLE `note`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
 -- AUTO_INCREMENT pour la table `prof`
 --
 ALTER TABLE `prof`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
