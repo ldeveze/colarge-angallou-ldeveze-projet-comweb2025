@@ -1,24 +1,45 @@
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 import '../App.css';
 
 function ConnexionProfesseur() {
   const navigate = useNavigate();
+  const [pseudo, setPseudo] = useState('');
+  const [motdepasse, setMotdepasse] = useState('');
+  const [erreur, setErreur] = useState('');
+
+  const handleLogin = () => {
+    fetch("http://localhost/api-projet/loginProf.php", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ pseudo, motdepasse })
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          navigate('/espace-professeur', { state: { identifiant: pseudo, idProf: data.id } });
+        } else {
+          setErreur("Identifiant ou mot de passe incorrect");
+        }
+      })
+      .catch(() => {
+        setErreur("Erreur lors de la connexion à l'API");
+      });
+  };
 
   return (
     <div className="container">
       <h3>Connexion Professeur</h3>
-      
+
       <label>Identifiant :</label>
-      <input type="text" />
+      <input type="text" value={pseudo} onChange={(e) => setPseudo(e.target.value)} />
 
       <label>Mot de passe :</label>
-      <input type="password" />
+      <input type="password" value={motdepasse} onChange={(e) => setMotdepasse(e.target.value)} />
 
-      <button
-        className="button-connexion"
-        onClick={() => navigate('/espace-professeur', { state: { identifiant: 'mme.mathieu' } })}
-      > Se connecter</button>
+      {erreur && <p style={{ color: 'red' }}>{erreur}</p>}
 
+      <button className="button-connexion" onClick={handleLogin}>Se connecter</button>
       <button className="button-retour" onClick={() => navigate(-1)}>Retour</button>
     </div>
   );

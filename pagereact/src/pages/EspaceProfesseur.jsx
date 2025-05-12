@@ -1,18 +1,21 @@
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import '../App.css';
 
 function EspaceProfesseur() {
   const location = useLocation();
   const navigate = useNavigate();
-  const identifiant = location.state?.identifiant || 'professeur inconnu';
+  const identifiant = location.state?.identifiant || 'inconnu';
+  const idProf = location.state?.idProf;
 
-  const notesDesEleves = [
-    { eleve: "Jules Dupont", matiere: "Maths", evaluation: "Contrôle 1", note: "15/20" },
-    { eleve: "Sophie Martin", matiere: "Maths", evaluation: "Contrôle 1", note: "12/20" },
-    { eleve: "Lucas Bernard", matiere: "Maths", evaluation: "Contrôle 1", note: "18/20" },
-    { eleve: "Jules Dupont", matiere: "Maths", evaluation: "Contrôle 2", note: "14/20" },
-    { eleve: "Sophie Martin", matiere: "Maths", evaluation: "Contrôle 2", note: "16/20" },
-  ];
+  const [notes, setNotes] = useState([]);
+
+  useEffect(() => {
+    fetch(`http://localhost/api-projet/notesProf.php?idProf=${idProf}`)
+      .then(res => res.json())
+      .then(data => setNotes(data))
+      .catch(err => console.error(err));
+  }, [idProf]);
 
   return (
     <div className="container">
@@ -23,18 +26,20 @@ function EspaceProfesseur() {
         <thead>
           <tr>
             <th>Élève</th>
+            <th>Classe</th>
             <th>Matière</th>
             <th>Évaluation</th>
             <th>Note</th>
           </tr>
         </thead>
         <tbody>
-          {notesDesEleves.map((note, index) => (
+          {notes.map((n, index) => (
             <tr key={index}>
-              <td>{note.eleve}</td>
-              <td>{note.matiere}</td>
-              <td>{note.evaluation}</td>
-              <td>{note.note}</td>
+              <td>{n.prenom} {n.nom}</td>
+              <td>{n.classe}</td>
+              <td>{n.matiere}</td>
+              <td>{n.libelle}</td>
+              <td>{n.valeur}/20</td>
             </tr>
           ))}
         </tbody>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mer. 07 mai 2025 à 12:18
+-- Généré le : lun. 12 mai 2025 à 17:16
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.2.12
 
@@ -128,7 +128,7 @@ CREATE TABLE `note` (
 --
 
 INSERT INTO `note` (`id`, `libelle`, `valeur`, `id_eleve`, `id_matiere`) VALUES
-(1, 'Interrogation surpri', 11, 2, 12),
+(1, 'Interrogation surprise', 11, 2, 12),
 (2, 'Examen final', 14, 3, 5),
 (3, 'Oral', 8, 1, 7),
 (4, 'Dissertation', 17, 4, 1),

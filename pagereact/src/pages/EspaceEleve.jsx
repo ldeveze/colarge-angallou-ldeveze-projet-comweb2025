@@ -1,4 +1,5 @@
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import '../App.css';
 
 function EspaceEleve() {
@@ -6,12 +7,14 @@ function EspaceEleve() {
   const navigate = useNavigate();
   const identifiant = location.state?.identifiant || 'inconnu';
 
-  const notes = [
-    { matiere: "Maths", prof: "Mme Dupont", evaluation: "Contrôle chapitre 1", note: "15/20" },
-    { matiere: "Français", prof: "M. Martin", evaluation: "Rédaction", note: "13/20" },
-    { matiere: "Histoire", prof: "Mme Lemoine", evaluation: "Exposé", note: "17/20" },
-    { matiere: "SVT", prof: "M. Durand", evaluation: "QCM", note: "14/20" },
-  ];
+  const [notes, setNotes] = useState([]);
+
+  useEffect(() => {
+    fetch(`http://localhost/api-projet/notesEleve.php?pseudo=${identifiant}`)
+      .then((res) => res.json())
+      .then((data) => setNotes(data))
+      .catch((err) => console.error(err));
+  }, [identifiant]);
 
   return (
     <div className="container">
@@ -22,18 +25,18 @@ function EspaceEleve() {
         <thead>
           <tr>
             <th>Matière</th>
-            <th>Professeur</th>
             <th>Évaluation</th>
             <th>Note</th>
+            <th>Professeur</th>
           </tr>
         </thead>
         <tbody>
           {notes.map((n, index) => (
             <tr key={index}>
               <td>{n.matiere}</td>
-              <td>{n.prof}</td>
-              <td>{n.evaluation}</td>
-              <td>{n.note}</td>
+              <td>{n.libelle}</td>
+              <td>{n.valeur}/20</td>
+              <td>{n.professeur}</td>
             </tr>
           ))}
         </tbody>
