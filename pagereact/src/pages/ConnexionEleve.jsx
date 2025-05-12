@@ -17,9 +17,7 @@ function ConnexionEleve() {
       <button
         className="button-connexion"
         onClick={() => navigate('/espace-eleve', { state: { identifiant: 'jules_dupont' } })}
-      >
-        Se connecter
-      </button>
+      >Se connecter</button>
       <button className="button-retour" onClick={() => navigate(-1)}>Retour</button>
     </div>
   );

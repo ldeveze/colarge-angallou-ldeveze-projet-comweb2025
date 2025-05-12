@@ -14,7 +14,11 @@ function ConnexionProfesseur() {
       <label>Mot de passe :</label>
       <input type="password" />
 
-      <button className="button-connexion">Se connecter</button>
+      <button
+        className="button-connexion"
+        onClick={() => navigate('/espace-professeur', { state: { identifiant: 'mme.mathieu' } })}
+      > Se connecter</button>
+
       <button className="button-retour" onClick={() => navigate(-1)}>Retour</button>
     </div>
   );
