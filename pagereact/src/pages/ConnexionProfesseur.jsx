@@ -9,7 +9,7 @@ function ConnexionProfesseur() {
   const [erreur, setErreur] = useState('');
 
   const handleLogin = () => {
-    fetch("http://localhost/api-projet/loginProf.php", {
+    fetch("https://ldeveze.zzz.bordeaux-inp.fr/api-projet/loginProf.php", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ pseudo, motdepasse })

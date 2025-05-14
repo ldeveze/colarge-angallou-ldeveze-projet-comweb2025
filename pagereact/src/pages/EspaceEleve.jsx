@@ -10,7 +10,7 @@ function EspaceEleve() {
   const [notes, setNotes] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost/api-projet/notesEleve.php?pseudo=${identifiant}`)
+    fetch(`https://ldeveze.zzz.bordeaux-inp.fr/api-projet/notesEleve.php?pseudo=${identifiant}`)
       .then((res) => res.json())
       .then((data) => setNotes(data))
       .catch((err) => console.error(err));

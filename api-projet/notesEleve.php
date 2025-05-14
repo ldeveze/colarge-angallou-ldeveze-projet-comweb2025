@@ -1,4 +1,11 @@
 <?php
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+header("Access-Control-Allow-Origin: *");
+header("Content-Type: application/json");
 // 🔐 Autoriser les appels depuis n'importe quelle origine (React local)
 header("Access-Control-Allow-Origin: *");
 
@@ -23,9 +30,9 @@ function envoiJSON($tab){
 function recupNotes() {
     // Connexion BDD
     $host = 'localhost';		
-    $dbname = 'college';
-    $username = 'root';
-    $password = '';
+    $dbname = 'ldeveze';
+    $username = 'ldeveze';
+    $password = 'PotDeFleurBleu2!';
 
     try {
         $bdd = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);

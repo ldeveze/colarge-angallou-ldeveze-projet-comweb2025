@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 
 header("Content-Type: application/json");
 
-$pdo = new PDO('mysql:host=localhost;dbname=college;charset=utf8', 'root', '');
+$pdo = new PDO('mysql:host=localhost;dbname=ldeveze;charset=utf8', 'ldeveze', 'PotDeFleurBleu2!');
 $idProf = $_GET['idProf'] ?? '';
 
 $stmt = $pdo->prepare("

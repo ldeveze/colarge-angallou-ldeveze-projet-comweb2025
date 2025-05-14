@@ -11,7 +11,7 @@ function EspaceProfesseur() {
   const [notes, setNotes] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost/api-projet/notesProf.php?idProf=${idProf}`)
+    fetch(`https://ldeveze.zzz.bordeaux-inp.fr/api-projet/notesProf.php?idProf=${idProf}`)
       .then(res => res.json())
       .then(data => setNotes(data))
       .catch(err => console.error(err));

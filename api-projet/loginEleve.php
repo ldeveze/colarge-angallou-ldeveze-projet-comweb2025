@@ -1,4 +1,5 @@
 <?php
+
 // ✅ En-têtes CORS — doivent être tout en haut (aucun espace ou ligne avant)
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
@@ -11,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 }
 
 // ✅ Connexion à la base de données
-$pdo = new PDO('mysql:host=localhost;dbname=college;charset=utf8', 'root', '');
+$pdo = new PDO('mysql:host=localhost;dbname=ldeveze;charset=utf8', 'ldeveze', 'PotDeFleurBleu2!');
 
 // ✅ Lecture du corps JSON envoyé par React
 $data = json_decode(file_get_contents('php://input'), true);
