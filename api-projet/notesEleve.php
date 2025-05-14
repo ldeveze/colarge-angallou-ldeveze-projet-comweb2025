@@ -1,58 +1,37 @@
 <?php
-
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
 header("Access-Control-Allow-Origin: *");
-header("Content-Type: application/json");
-// 🔐 Autoriser les appels depuis n'importe quelle origine (React local)
-header("Access-Control-Allow-Origin: *");
-
-// 🔐 Autoriser les méthodes HTTP
 header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
-
-// 🔐 Autoriser les headers personnalisés
 header("Access-Control-Allow-Headers: Content-Type");
 
-// 🔁 Si c'est une pré-requête OPTIONS (automatique), on termine ici :
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     http_response_code(200);
     exit();
 }
 
+header("Content-Type: application/json");
 
-function envoiJSON($tab){
-    header('Content-Type: application/json');
+function envoiJSON($tab) {
     echo json_encode($tab, JSON_UNESCAPED_UNICODE);
 }
 
-function recupNotes() {
-    // Connexion BDD
-    $host = 'localhost';		
-    $dbname = 'ldeveze';
-    $username = 'ldeveze';
-    $password = 'PotDeFleurBleu2!';
+try {
+    $bdd = new PDO('mysql:host=localhost;dbname=ldeveze;charset=utf8', 'ldeveze', 'PotDeFleurBleu2!');
+} catch(Exception $e) {
+    envoiJSON(["error" => "Connexion BDD échouée : " . $e->getMessage()]);
+    exit();
+}
 
-    try {
-        $bdd = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
-    } catch(Exception $e) {
-        die('Erreur : '. $e->getMessage());
-    }
+$pseudo = $_GET['pseudo'] ?? null;
 
-    // Vérifier que le paramètre pseudo existe
-    if (!isset($_GET['pseudo'])) {
-        envoiJSON(["error" => "Paramètre 'pseudo' manquant"]);
-        return;
-    }
+if (!$pseudo) {
+    envoiJSON(["error" => "Paramètre 'pseudo' manquant"]);
+    exit();
+}
 
-    $pseudo = $_GET['pseudo'];
-
-    // Requête pour récupérer les notes
-    $requete = "
-    SELECT 
-        n.libelle, 
-        n.valeur, 
+$requete = "
+    SELECT
+        n.libelle,
+        n.valeur,
         m.nom AS matiere,
         CONCAT(p.prenom, ' ', p.nom) AS professeur
     FROM note n
@@ -62,13 +41,8 @@ function recupNotes() {
     WHERE e.pseudo = ?
 ";
 
+$stmt = $bdd->prepare($requete);
+$stmt->execute([$pseudo]);
+$notes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    $stmt = $bdd->prepare($requete);
-    $stmt->execute([$pseudo]);
-    $tableau = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-    envoiJSON($tableau);
-}
-
-recupNotes();
-?>
+envoiJSON($notes);

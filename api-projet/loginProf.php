@@ -20,8 +20,4 @@ $stmt = $pdo->prepare("SELECT * FROM prof WHERE pseudo = ? AND motdepasse = ?");
 $stmt->execute([$pseudo, $motdepasse]);
 $prof = $stmt->fetch(PDO::FETCH_ASSOC);
 
-if ($prof) {
-    echo json_encode(['success' => true, 'pseudo' => $pseudo, 'id' => $prof['id']]);
-} else {
-    echo json_encode(['success' => false, 'message' => 'Identifiants incorrects']);
-}
+echo json_encode($prof ? ['success' => true, 'pseudo' => $pseudo, 'id' => $prof['id']] : ['success' => false, 'message' => 'Identifiants incorrects']);
